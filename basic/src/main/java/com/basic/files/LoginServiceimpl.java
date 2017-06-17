@@ -1,8 +1,6 @@
 package com.basic.files;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,8 +10,8 @@ import com.basic.Entity.User;
 @Transactional
 public class LoginServiceimpl implements LoginService{
 
-	//@Autowired
-	//private UserRepository userRepository;
+	@Autowired
+	private UserRepository userRepository;
 	
 	/*public void setUserDaoImpl(UserRepository userRepository) {
 		this.userRepository = userRepository;
@@ -30,16 +28,13 @@ public class LoginServiceimpl implements LoginService{
 			return response;
 		}*/
 		//User user = (User) baseDaoImpl.findWithNamedQueries("user.findByEmailAndPassword", User.class, queryParams);
-		User user = new User();//(User) userRepository.findUserByEmailAndPassword(email,password);
-		/*if(user==null){
-			response.setResponseCode("103");
-			response.setResponseDesc("Username & password does not match");
+		User user = (User) userRepository.findUserByEmailAndPassword(email,password);
+		if(user==null){
 			return response;
-		}*/
-		userDto = new UserDto();
-		userDto.setEmail(user.getEmail());
-		userDto.setMobileNo(user.getMobileNo());
-		userDto.setName(user.getName());
+		}
+		response.setEmail(user.getEmail());
+		response.setMobileNo(user.getMobileNo());
+		response.setName(user.getName());
 		
 		
 		return response;

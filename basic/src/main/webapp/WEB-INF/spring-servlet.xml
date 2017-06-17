@@ -3,13 +3,16 @@
     xmlns:context="http://www.springframework.org/schema/context"
     xmlns:tx="http://www.springframework.org/schema/tx"
     xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:jpa="http://www.springframework.org/schema/data/jpa"
     xsi:schemaLocation="http://www.springframework.org/schema/beans
 	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
 	http://www.springframework.org/schema/context
 	http://www.springframework.org/schema/context/spring-context-3.0.xsd
 	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
-	http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
- 
+	http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+	http://www.springframework.org/schema/data/jpa
+    http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
+	 
  	<!-- It register the beans in context and scan the annotations inside beans and activate them -->
     <context:component-scan base-package="com.basic.*" />
     <mvc:default-servlet-handler/>
@@ -17,6 +20,7 @@
     	 two beans - DefaultAnnotationHandlerMapping and AnnotationMethodHandlerAdapter -->
     <mvc:annotation-driven />
     
+    <jpa:repositories base-package="com.basic" />
      
     <!-- This helps in mapping the logical view names to directly view files under a certain pre-configured directory -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -41,7 +45,7 @@
    </bean>
    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
       <property name="driverClassName" value="com.mysql.jdbc.Driver" />
-      <property name="url" value="jdbc:mysql://localhost:3306/twistwallet" />
+      <property name="url" value="jdbc:mysql://localhost:3306/basic" />
       <property name="username" value="${mysql.username}" />
       <property name="password" value="${mysql.password}" />
    </bean>
